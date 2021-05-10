@@ -1,0 +1,24 @@
+{
+  "properties": [
+    {
+      "name": "hermes.websocket.allIdleTime",
+      "type": "java.lang.String",
+      "description": "Description for all idle time."
+    },
+    {
+      "name": "hermes.websocket.writerIdleTime",
+      "type": "java.lang.String",
+      "description": "Description for writer idle time."
+    },
+    {
+      "name": "hermes.websocket.readerIdleTime",
+      "type": "java.lang.String",
+      "description": "Description for reader idle time."
+    },
+    {
+      "name": "hermes.websocket.port",
+      "type": "java.lang.String",
+      "description": "Description for websocket port."
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Server-Sent-Event Tester</title>
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.4/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.4/examples/cover/cover.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="site-wrapper" ng-app="mainApp" ng-controller="mainController">
+
+    <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+            <div class="masthead clearfix">
+                <div class="inner">
+                    <h3 class="masthead-brand">Server-Sent-Event Tester</h3>
+
+                </div>
+            </div>
+
+            <div style="padding-bottom: 5%;padding-left:20px;text-align: left;">
+                <form class="form-inline">
+                    <div class="form-group" style="width: 60%">
+                        <input type="text" class="form-control " id="connectionUrl" style="width: 100%"
+                               placeholder="url" value="http://127.0.0.1:8080/sync/sse/subscribe?themeName=test&id=1">
+                    </div>
+                    <button type="button" class="btn btn-default" ng-click="connectionToSSE()">Connection</button>
+                    <button type="button" class="btn btn-default" ng-click="clearMessageContent()">Clear Message
+                    </button>
+                </form>
+            </div>
+            <div id="messageContentContainer" class="inner cover">
+                <div id="messageTextarea"
+                     style="background-color: rgb(45,45,45);width: 100%;height: 400px;overflow-y: scroll;text-align: left;white-space: pre-line;word-break:break-all"
+                     ng-mouseover="messageTextareaMouseOver()" ng-mouseout="messageTextareaMouseOut()">
+                    <div ng-repeat="messageItem in messageItems">
+                        <span>
+                            {{messageItem.date}}
+                        </span>
+                        <span>
+                            {{messageItem.title}}
+                        </span>
+                        <span>
+                            {{messageItem.content}}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="mastfoot">
+                    <div class="inner">
+                        <p>Example For <a href="https://github.com/Aethli">Hermes</a>, by <a
+                                href="https://github.com/Aethli">@Aethli</a>.</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"
+            integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
+            crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.4/assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.4/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/angular@1.8.2/angular.min.js"></script>
+    <script src="./hermesClient.js"></script>
+</div>
+</body>
+</html>
