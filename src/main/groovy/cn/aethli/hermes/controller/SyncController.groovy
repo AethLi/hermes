@@ -7,12 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import org.apache.commons.lang3.ObjectUtils
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestControllerAdvice
+import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Flux
 
 import javax.annotation.Resource
@@ -37,7 +32,7 @@ class SyncController {
 
     @PostMapping(value = "sse/release")
     ResponseEntity<ObjectUtils.Null> sseRelease(@RequestBody ReleaseBo releaseBo) {
-        SSEManager.releaseMessageById(releaseBo.getThemeName(), releaseBo.getId(), new SSEMessage(UUID.randomUUID().toString(), releaseBo.getContent()))
+        SSEManager.releaseMessageById(releaseBo.getThemeName(), releaseBo.getId(), new SSEMessage(UUID.randomUUID().toString(), releaseBo.getContent(), new Date()))
         ResponseEntity.ok(null)
     }
 }

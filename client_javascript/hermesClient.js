@@ -1,8 +1,7 @@
 let app = angular.module('mainApp', []);
 app.controller('mainController', function ($scope) {
 
-    $scope.messageContent = "";
-    let messageItems = [];
+    $scope.messageItems = [];
 
     let autoScrollFlag = true;
 
@@ -11,20 +10,26 @@ app.controller('mainController', function ($scope) {
             let source = new EventSource($("#connectionUrl").val(), {withCredentials: true});
             // console.log(source.readyState);
             source.onopen = function (event) {
+                let messageItem = {};
+                messageItem.date = Date();
+                messageItem.title = "Successfully connected to the server!";
+                $scope.messageItems.push(messageItem);
+                while ($scope.messageItems.length > 100) {
+                    $scope.messageItems.shift();
+                }
+                $scope.$digest();
             };
             source.onmessage = function (event) {
                 let data = event.data;
                 let origin = event.origin;
-                let lastEventId = event.lastEventId;
                 let messageItem = {};
                 messageItem.date = Date();
-                messageItem.title = "Message(lastEventId:" + lastEventId + ") From Server(origin:" + origin + "): ";
+                messageItem.title = "Message From Server(origin:" + origin + "): ";
                 messageItem.content = data;
-                messageItems.push(messageItem);
-                while (messageItems.length > 100) {
-                    messageItems.shift();
+                $scope.messageItems.push(messageItem);
+                while ($scope.messageItems.length > 100) {
+                    $scope.messageItems.shift();
                 }
-                $scope.messageContent = messageItems.join("");
                 $scope.$digest();
                 if (autoScrollFlag) {
                     document.getElementById("messageTextarea").scrollTop = document.getElementById("messageTextarea").scrollHeight;
@@ -35,7 +40,7 @@ app.controller('mainController', function ($scope) {
         }
     }
     $scope.clearMessageContent=function (){
-        $scope.messageContent = "";
+        $scope.messageItems = [];
     }
     $scope.messageTextareaMouseOver = function () {
         autoScrollFlag = false;
