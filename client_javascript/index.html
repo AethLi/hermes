@@ -1,80 +1,74 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en_US">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Server-Sent-Event Tester</title>
-    <!-- Bootstrap core CSS -->
+    <title>Server-Sent-Events Tester</title>
     <link href="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.4/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
     <link href="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.4/examples/cover/cover.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"
+            integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.4/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/angular@1.8.2/angular.min.js"></script>
+    <script src="./hermesClient.js"></script>
 </head>
-
 <body>
 
 <div class="site-wrapper" ng-app="mainApp" ng-controller="mainController">
-
     <div class="site-wrapper-inner">
-
         <div class="cover-container">
-
             <div class="masthead clearfix">
                 <div class="inner">
-                    <h3 class="masthead-brand">Server-Sent-Event Tester</h3>
-
+                    <h3 class="masthead-brand">Server-Sent-Events Tester</h3>
                 </div>
             </div>
-
+            <div class="well inner well-sm"
+                 style="background-color: rgb(45,45,45);margin-left: 20px;margin-right: 20px;text-align: start;padding: 10px">
+                Traditionally, a web page has to send a request to the server to receive new data; that is, the page
+                requests data from the server. With server-sent events, it's possible for a server to send new data to a
+                web page at any time, by pushing messages to the web page. These incoming messages can be treated as
+                Events + data inside the web page.
+            </div>
             <div style="padding-bottom: 5%;padding-left:20px;text-align: left;">
                 <form class="form-inline">
                     <div class="form-group" style="width: 60%">
                         <input type="text" class="form-control " id="connectionUrl" style="width: 100%"
                                placeholder="url" value="http://127.0.0.1:8080/sync/sse/subscribe?themeName=test&id=1">
                     </div>
-                    <button type="button" class="btn btn-default" ng-click="connectionToSSE()">Connection</button>
+                    <button type="button" class="btn btn-default" ng-click="connectionToSSE()">
+                        {{connectionButtonText}}
+                    </button>
                     <button type="button" class="btn btn-default" ng-click="clearMessageContent()">Clear Message
                     </button>
                 </form>
             </div>
             <div id="messageContentContainer" class="inner cover">
                 <div id="messageTextarea"
-                     style="background-color: rgb(45,45,45);width: 100%;height: 400px;overflow-y: scroll;text-align: left;white-space: pre-line;word-break:break-all"
+                     style="background-color: rgb(45,45,45);width: 100%;height: 400px;overflow-y: auto;text-align: left;white-space: pre-line;word-break:break-all"
                      ng-mouseover="messageTextareaMouseOver()" ng-mouseout="messageTextareaMouseOut()">
                     <div style="line-height: 60%" ng-repeat="messageItem in messageItems">
-                        <span style="color: red;">
+                        <span style="color: rgb(255,0,70);">
                             {{messageItem.date}}
                         </span>
-                        <span style="">
+                        <span>
                             {{messageItem.title}}
                         </span>
                         <span style="line-height: 100%">
                             {{messageItem.content}}
                         </span>
-                        <br>
                     </div>
                 </div>
-
                 <div class="mastfoot">
                     <div class="inner">
-                        <p>Example For <a href="https://github.com/Aethli">Hermes</a>, by <a
+                        <p>Client Example For <a href="https://github.com/AethLi/hermes">Hermes</a>, By <a
                                 href="https://github.com/Aethli">@Aethli</a>.</p>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"
-            integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
-            crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.4/assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.4/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/angular@1.8.2/angular.min.js"></script>
-    <script src="./hermesClient.js"></script>
 </div>
 </body>
 </html>
